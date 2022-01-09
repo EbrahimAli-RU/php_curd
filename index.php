@@ -8,7 +8,7 @@ if (file_exists('books.json')) {
 }
 ////MAKE QUERY
 $query = <<<SQL
-    SELECT * FROM  books 
+    SELECT * FROM  books
     SQL;
 $statement = $conn->prepare($query);
 $statement->execute();
@@ -37,9 +37,10 @@ $books = $rows;
         <?php
         if (isset($_POST['submit'])) {
             $searchBy = $_POST['search'];
-            $query = 'SELECT * FROM  books WHERE title=:searchBy';
+            $query = "SELECT * FROM  books WHERE title = :value";
             $statement = $conn->prepare($query);
-            $statement->execute(['title' => $searchBy]);
+            $statement->bindParam(':value', $searchBy);
+            $statement->execute();
             $rows = $statement->fetchAll();
             $books = $rows;
         }
