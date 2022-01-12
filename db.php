@@ -1,9 +1,8 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dns = "mysql:host=$servername;dbname=books";
-// $dns = "sqlite:movie.db";
+$servername = "sql6.freesqldatabase.com";
+$username = "sql6465207";
+$password = "SCLvvTmATh";
+$dns = "mysql:host=$servername;dbname=sql6465207";
 $conn;
 try {
   $conn = new PDO($dns, $username, $password);
