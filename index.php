@@ -31,9 +31,9 @@ $books = $rows;
 </head>
 
 <body>
-    <h1 style="text-align: center;">File Based CURD Application</h1>
+    <h1 style="text-align: center;margin-top:5rem;">File Based CURD Application</h1>
     <div class="index_search_div">
-        <a href="/CURD/create.php" class="create_btn">Create</a>
+        <a href="/create.php" class="create_btn">Create</a>
         <?php
         if (isset($_POST['submit'])) {
             $searchBy = $_POST['search'];
@@ -44,19 +44,6 @@ $books = $rows;
             $rows = $statement->fetchAll();
             $books = $rows;
         }
-
-        // $newBooks = array();
-        // if (isset($_POST['submit'])) {
-
-        //     if (strlen($searchBy) > 0) {
-        //         foreach ($books as $key => $value) {
-        //             if ($value['title'] == $searchBy) {
-        //                 array_push($newBooks, $value);
-        //             }
-        //         }
-        //         $books = $newBooks;
-        //     }
-        // }
         ?>
         <form method="post" class="index_search_div_inner">
             <input class="search_box" id="search_input" name="search" type="search" placeholder="Seach.......">
@@ -88,7 +75,7 @@ $books = $rows;
                 <td><?php echo $value['pages'] ?></td>
                 <td><?php echo $value['isbn'] ?></td>
                 <td>
-                    <a type='button' class='btn btn-danger' href="<?php echo $BASE_URL . '/CURD' . '/delete.php?id=' . $value['id']; ?>">Delete</a>
+                    <a type='button' class='btn btn-danger' href="<?php echo $BASE_URL .'/delete.php?id=' . $value['id']; ?>">Delete</a>
                 </td>
             </tr>
         <?php endforeach ?>
