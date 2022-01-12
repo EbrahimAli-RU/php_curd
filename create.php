@@ -4,9 +4,12 @@ include_once('db.php');
 
 if (isset($_POST['submit'])) {
     ////////GET VALUES FROM INPUT FIELD
+    $available = 0;
+    if ($_POST['available'] === "yes") {
+        $available = true;
+    }
     $title = $_POST['title'];
     $author = $_POST['author'];
-    $available = $_POST['available'] === "true";
     $pages = $_POST['pages'];
     $isbn = $_POST['isbn'];
 
@@ -30,7 +33,6 @@ if (isset($_POST['submit'])) {
     if ($statement->execute($params)) {
         header("Location: index.php");
     }
-    echo $conn->lastInsertId();
 }
 
 ?>
@@ -66,13 +68,13 @@ if (isset($_POST['submit'])) {
         <div style="display: flex;">
             <p class="available">Available</p>
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="available" id="flexRadioDefault1">
+                <input class="form-check-input" type="radio" value="yes" name="available" id="flexRadioDefault1">
                 <label class="form-check-label" for="flexRadioDefault1">
                     YES
                 </label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="available" id="flexRadioDefault2" checked>
+                <input class="form-check-input" type="radio" value="no" name="available" id="flexRadioDefault2" checked>
                 <label class="form-check-label" for="flexRadioDefault2">
                     NO
                 </label>
@@ -83,55 +85,3 @@ if (isset($_POST['submit'])) {
 </body>
 
 </html>
-
-<?php
-// include_once('config.php');
-// include_once('db.php');
-// $books = array();
-// if (file_exists('books.json')) {
-//     $json = file_get_contents('books.json');
-//     $books = json_decode($json, true);
-// }
-
-// if (isset($_POST['submit'])) {
-//     $ele = end($books);
-//     $id =  $ele['id'];
-//     $id++;
-//     $data = array(
-//         'id' => $id,
-//         'title' => htmlspecialchars($_POST['title']),
-//         'author' => $_POST['author'],
-//         'available' => $_POST['available'] === "true",
-//         'pages' => $_POST['pages'],
-//         'isbn' => $_POST['isbn']
-//     );
-//     $title = $_POST['title'];
-//     $author = $_POST['author'];
-//     $available = $_POST['available'] === "true";
-//     $pages = $_POST['pages'];
-//     $isbn = $_POST['isbn'];
-//     $query = <<<SQL
-//     INSERT INTO books (title, author,available, pages, isbn)
-//     VALUES (:title, :author, :available , :pages, :isbn)
-//     SQL;
-//     $statement = $conn->prepare($query);
-//     $params = [
-//         'title' => $title,
-//         'author' => $author,
-//         'available' => $available,
-//         'pages' => $pages,
-//         'isbn' => $pages
-//     ];
-//     $statement->execute($params);
-//     echo $conn->lastInsertId();
-//     if ($data['title'] == '' || $data['title'] == '' || $data['pages'] == '' || $data['isbn'] == '') {
-//         echo '<script>alert("All Field is Required.")</script>';
-//     } else {
-//         array_push($books, $data);
-//         $books = json_encode($books);
-//         file_put_contents('books.json', $books);
-//         header("Location: index.php");
-//     }
-// }
-
-?>
